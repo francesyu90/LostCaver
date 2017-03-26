@@ -6,21 +6,14 @@ import java.awt.Point;
 
 public class GPS {
 
-    Caver caver;
-
-    public GPS(Caver caver) throws LostCaverException {
+    public static Point getCaverPosition(Caver caver) throws LostCaverException {
         Util.validateCurrentObject(caver);
-        this.caver = caver;
+        return caver.getPosition();
     }
 
-    public Point getCaverPosition() throws LostCaverException {
-        Util.validateCurrentObject(this);
-        return this.caver.getPosition();
-    }
-
-    public Direction getCaverDirection() throws LostCaverException {
-        Util.validateCurrentObject(this);
-        return this.caver.getDirection();
+    public static Direction getCaverDirection(Caver caver) throws LostCaverException {
+        Util.validateCurrentObject(caver);
+        return caver.getDirection();
     }
 
 }

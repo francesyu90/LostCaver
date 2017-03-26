@@ -8,12 +8,12 @@ import java.util.Random;
 
 public class Partner {
 
-    public static String generateInstruction(Grid grid, GPS gps) throws LostCaverException {
+    public static String generateInstruction(Grid grid, Caver caver) throws LostCaverException {
         Util.validateCurrentObject(grid);
-        Util.validateCurrentObject(gps);
+        Util.validateCurrentObject(caver);
 
-        Point cPos = gps.getCaverPosition();
-        Direction cDir = gps.getCaverDirection();
+        Point cPos = GPS.getCaverPosition(caver);
+        Direction cDir = GPS.getCaverDirection(caver);
         Point exit = grid.getExit();
 
         String instruction = null;
