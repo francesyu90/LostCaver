@@ -3,7 +3,7 @@ package utils;
 import utils.*;
 
 public enum Instruction {
-    M, R, L;
+    M, R, L, DONE;
 
     public static boolean isInstruction(String instruction) throws LostCaverException {
         Util.validateCurrentObject(instruction);
