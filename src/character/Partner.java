@@ -64,7 +64,7 @@ public class Partner {
 
             }
         } else if(cPos.getX() == exit.getX() && cPos.getY() == exit.getY()) {
-            instruction = "DONE";
+            instruction = "D";
         } else {
             throw new LostCaverException("Error: Cannot generate instruction for current coordinates [(" +
                 (int)cPos.getX() + ", " + (int)cPos.getY() + ")] of the Caver and exit [(" +
