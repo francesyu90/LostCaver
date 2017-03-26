@@ -9,46 +9,9 @@ public class Caver {
     private Point position;
     private Direction dir;
 
-    /**
-     *  Checks if a given string is valid direction
-     *  @param direction A given string to check if it is a valid direction
-     *  @return Throws exception if it is not valid direction
-     */
-    private void validateDirection(String direction) throws LostCaverException {
-        Util.validateCurrentObject(direction);
-        if(!Direction.isDirection(direction)) {
-            throw new LostCaverException("Error: No such direction: " + direction + " !");
-        }
-    }
-
-    /**
-     *  Checks if a given point is in grid
-     *  @param point A given point to check if it is in grid
-     *  @return Throws exception if it is not in grid
-     */
-    private void validatePointInGrid(Point point) throws LostCaverException {
-        if(!Grid.validatePoint(point)) {
-            throw new LostCaverException("Error: Given point ("
-                + (int)point.getX() + ", " + (int)point.getY() +") is not in Grid!");
-        }
-    }
-
-    /**
-     *  Checks if a given point is in grid
-     *  @param x X coordinate
-     *  @param y Y coordinate
-     *  @return Throws exception if it is not in grid
-     */
-    private void validatePointInGrid(int x, int y) throws LostCaverException {
-        if(!Grid.validatePoint(x, y)) {
-            throw new LostCaverException("Error: Given point ("
-                + x + ", " + y +") is not in Grid!");
-        }
-    }
-
     public Caver() {
         this.position = new Point(0, 0);
-        this.dir = Direction.DEFAULT;
+        this.dir = Direction.EAST;
     }
 
     public Caver(String direction) throws LostCaverException {
@@ -69,20 +32,18 @@ public class Caver {
     }
 
     public void setDirection(String direction) throws LostCaverException {
-        Util.validateCurrentObject(this);
-        validateDirection(direction);
-        this.dir = Direction.valueOf(direction.toUpperCase());
+        this.dir = Direction.convertToDirection(direction);
     }
 
     public void setPosition(Point point) throws LostCaverException {
         Util.validateCurrentObject(this);
-        validatePointInGrid(point);
+        Grid.validatePointInGrid(point);
         this.position = point;
     }
 
     public void setPosition(int x, int y) throws LostCaverException {
         Util.validateCurrentObject(this);
-        validatePointInGrid(x, y);
+        Grid.validatePointInGrid(x, y);
         this.position = new Point(x, y);
     }
 
@@ -105,3 +66,8 @@ public class Caver {
 
 
 }
+
+
+
+
+

@@ -16,10 +16,6 @@ public class Grid {
         this.exit = new Point(x, y);
     }
 
-    /**
-     * Returns where the exit is
-     * @return The exit
-     */
     public Point getExit() {
         if(this == null) {
             return null;
@@ -28,12 +24,7 @@ public class Grid {
         }
     }
 
-    /**
-     *  Check if a given point is in the grid
-     *  @param point Next position of the Caver
-     *  @return True if the given point is in the grid; False otherwise
-     */
-    public static boolean validatePoint(Point point) throws LostCaverException {
+    private static boolean validatePoint(Point point) throws LostCaverException {
         Util.validateCurrentObject(point);
         int x = (int)point.getX();
         int y = (int)point.getY();
@@ -44,17 +35,25 @@ public class Grid {
         }
     }
 
-    /**
-     *  Check if a given point is in the grid
-     *  @param x X coordinate
-     *  @param y Y coordinate
-     *  @return True if the given point is in the grid; False otherwise
-     */
-    public static boolean validatePoint(int x, int y) {
+    private static boolean validatePoint(int x, int y) {
         if(x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT) {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public static void validatePointInGrid(Point point) throws LostCaverException {
+        if(!Grid.validatePoint(point)) {
+            throw new LostCaverException("Error: Given point ("
+                + (int)point.getX() + ", " + (int)point.getY() +") is not in Grid!");
+        }
+    }
+
+    public static void validatePointInGrid(int x, int y) throws LostCaverException {
+        if(!Grid.validatePoint(x, y)) {
+            throw new LostCaverException("Error: Given point ("
+                + x + ", " + y +") is not in Grid!");
         }
     }
 }

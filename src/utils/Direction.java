@@ -1,7 +1,7 @@
 package utils;
 
 public enum Direction {
-    EAST, WEST, SOUTH, NORTH, DEFAULT;
+    EAST, WEST, SOUTH, NORTH;
 
     public static boolean isDirection(String direction) {
         Direction[] dirs = Direction.values();
@@ -11,5 +11,17 @@ public enum Direction {
             }
         }
         return false;
+    }
+
+    private static void validateDirection(String direction) throws LostCaverException {
+        Util.validateCurrentObject(direction);
+        if(!isDirection(direction)) {
+            throw new LostCaverException("Error: No such direction: " + direction + " !");
+        }
+    }
+
+    public static Direction convertToDirection(String direction) throws LostCaverException {
+        validateDirection(direction);
+        return Direction.valueOf(direction.toUpperCase());
     }
 }
