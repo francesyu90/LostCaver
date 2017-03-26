@@ -1,7 +1,7 @@
 package utils;
 
 public enum Direction {
-    EAST, WEST, SOUTH, NORTH;
+    E, W, S, N;
 
     public static boolean isDirection(String direction) {
         Direction[] dirs = Direction.values();

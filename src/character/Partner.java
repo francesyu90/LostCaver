@@ -22,11 +22,11 @@ public class Partner {
 
         if(cPos.getX() == exit.getX() && cPos.getY() < exit.getY()) {
             switch(cDir) {
-                case EAST:  instruction = "L";
+                case E:  instruction = "L";
                             break;
-                case WEST:  instruction = "R";
+                case W:  instruction = "R";
                             break;
-                case NORTH: inst = rand.nextInt(2) + 1;
+                case N: inst = rand.nextInt(2) + 1;
                             if(inst == 1) {
                                 instruction = "L";
                             } else {
@@ -38,16 +38,16 @@ public class Partner {
             }
         } else if(cPos.getY() == exit.getY() && cPos.getX() < exit.getX()) {
             switch(cDir) {
-                case EAST:  instruction = "M";
+                case E:  instruction = "M";
                             break;
-                case WEST:  inst = rand.nextInt(2) + 1;
+                case W:  inst = rand.nextInt(2) + 1;
                             if(inst == 1) {
                                 instruction = "L";
                             } else {
                                 instruction = "R";
                             };
                             break;
-                case NORTH: instruction = "R";
+                case N: instruction = "R";
                             break;
                 default:    instruction = "L";
                             break;

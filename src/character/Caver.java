@@ -1,6 +1,8 @@
 package character;
-import utils.Direction;
+
 import java.awt.Point;
+import java.util.ArrayList;
+
 import utils.*;
 import assets.*;
 
@@ -11,7 +13,7 @@ public class Caver {
 
     public Caver() {
         this.position = new Point(0, 0);
-        this.dir = Direction.EAST;
+        this.dir = Direction.E;
     }
 
     public Caver(String direction) throws LostCaverException {
@@ -37,14 +39,22 @@ public class Caver {
 
     public void setPosition(Point point) throws LostCaverException {
         Util.validateCurrentObject(this);
-        Grid.validatePointInGrid(point);
-        this.position = point;
+        try {
+            Grid.validatePointInGrid(point);
+            this.position = point;
+        } catch(LostCaverException lostCaverException) {
+            throw new LostCaverException("Result: The Caver died because it fell off the edges of the cave!");
+        }
     }
 
     public void setPosition(int x, int y) throws LostCaverException {
         Util.validateCurrentObject(this);
-        Grid.validatePointInGrid(x, y);
-        this.position = new Point(x, y);
+        try {
+            Grid.validatePointInGrid(x, y);
+            this.position = new Point(x, y);
+        } catch(LostCaverException lostCaverException) {
+            throw new LostCaverException("Result: The Caver died because it fell off the edges of the cave!");
+        }
     }
 
     public Point getPosition() throws LostCaverException {
@@ -60,8 +70,82 @@ public class Caver {
     public String toStr() throws LostCaverException {
         Util.validateCurrentObject(this);
         String coorAndDir = "(" + (int)this.position.getX() + ", "
-            + (int)this.position.getY() + ")" + this.dir.name().charAt(0);
+            + (int)this.position.getY() + ")" + this.dir.name();
         return coorAndDir;
+    }
+
+     public void executeInstructions(ArrayList<String> instrs) throws LostCaverException {
+        Util.validateCurrentObject(this);
+        Util.validateCurrentObject(instrs);
+        for(String instruction: instrs) {
+            executeInstruction(instruction);
+        }
+    }
+
+    public void executeInstruction(String instr) throws LostCaverException {
+        Util.validateCurrentObject(this);
+        Util.validateCurrentObject(instr);
+        Instruction instruction = Instruction.convertToInstruction(instr);
+        switch(instruction) {
+            case M:   moveForward();
+                      break;
+            case L:   spin90DegLeft();
+                      break;
+            case R:   spin90DegRight();
+                      break;
+            default:  Util.printMessage("Result: Congratulations! The caver found the exit successfully!");
+                      return;
+        }
+        Util.printMessage(toStr());
+    }
+
+    private void moveForward() throws LostCaverException {
+        Util.validateCurrentObject(this);
+        int x = (int)this.position.getX();
+        int y = (int)this.position.getY();
+        switch(this.dir) {
+            case E:    x = x + 1;
+                          break;
+            case W:    x = x - 1;
+                          break;
+            case N:    y = y + 1;
+                          break;
+            default:   y = y - 1;
+                          break;
+        }
+        setPosition(x, y);
+    }
+
+    private void spin90DegRight() throws LostCaverException {
+        Util.validateCurrentObject(this);
+        String nextDir = null;
+        switch(this.dir) {
+            case E:    nextDir = "S";
+                          break;
+            case W:    nextDir = "N";
+                          break;
+            case N:   nextDir = "E";
+                          break;
+            default:      nextDir = "W";
+                          break;
+        }
+        setDirection(nextDir);
+    }
+
+    private void spin90DegLeft() throws LostCaverException {
+        Util.validateCurrentObject(this);
+        String nextDir = null;
+        switch(this.dir) {
+            case E:    nextDir = "N";
+                          break;
+            case W:    nextDir = "S";
+                          break;
+            case N:   nextDir = "W";
+                          break;
+            default:      nextDir = "E";
+                          break;
+        }
+        setDirection(nextDir);
     }
 
 
