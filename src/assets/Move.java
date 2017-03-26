@@ -6,7 +6,23 @@ import character.*;
 
 public class Move {
 
-    public static Caver moveForward(Caver caver) throws LostCaverException {
+    public static Caver executeInstruction(Caver caver, String instr) throws LostCaverException {
+        Util.validateCurrentObject(caver);
+        Instruction instruction = Instruction.convertToInstruction(instr);
+        switch(instruction) {
+            case M:   caver = moveForward(caver);
+                      break;
+            case L:   caver = spin90DegLeft(caver);
+                      break;
+            case R:   caver = spin90DegRight(caver);
+                      break;
+            default:  Util.printMessage("Congratulations! The caver found the exit successfully!");
+                      System.exit(0);
+        }
+        return caver;
+    }
+
+    private static Caver moveForward(Caver caver) throws LostCaverException {
         Util.validateCurrentObject(caver);
         Point position = caver.getPosition();
         int x = (int)position.getX();
@@ -26,7 +42,7 @@ public class Move {
         return caver;
     }
 
-    public static Caver spin90DegRight(Caver caver) throws LostCaverException {
+    private static Caver spin90DegRight(Caver caver) throws LostCaverException {
         Util.validateCurrentObject(caver);
         Direction dir = caver.getDirection();
         String nextDir = null;
@@ -44,7 +60,7 @@ public class Move {
         return caver;
     }
 
-    public static Caver spin90DegLeft(Caver caver) throws LostCaverException {
+    private static Caver spin90DegLeft(Caver caver) throws LostCaverException {
         Util.validateCurrentObject(caver);
         Direction dir = caver.getDirection();
         String nextDir = null;
