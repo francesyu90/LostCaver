@@ -11,7 +11,7 @@ import assets.*;
 
 public class Util {
 
-    private static int MAX_NUM_OF_EXECUTION = 1000;
+    private static int MAX_NUM_OF_EXECUTION = 100;
 
     public static void validateCurrentObject(Object obj) throws LostCaverException {
         if(obj == null) {
