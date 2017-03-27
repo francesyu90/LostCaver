@@ -7,8 +7,12 @@ import java.io.*;
 
 import utils.*;
 import character.*;
+import assets.*;
 
 public class Util {
+
+    private static int max_number_of_execution = 200;
+
     public static void validateCurrentObject(Object obj) throws LostCaverException {
         if(obj == null) {
             throw new LostCaverException("Error: Current object does not exist!");
@@ -63,6 +67,32 @@ public class Util {
             }
             caver.executeInstructions(instrSet);
         }
+    }
+
+    public static void getUserInputAndProcessInstructions() throws LostCaverException {
+        Scanner sc = new Scanner(System.in);
+        printMessage("Please enter x coordinate: ");
+        int x = sc.nextInt();
+        printMessage("Please enter y coordinate: ");
+        int y = sc.nextInt();
+        printMessage("Please enter the initial direction: ");
+        String direction = sc.next();
+        Caver caver = new Caver(x, y, direction);
+        printMessage("Initial position: " + caver.toStr());
+        Grid grid = new Grid();
+        printMessage(grid.toStr());
+        String instruction = null;
+        int counter = 0;
+        while(!(instruction = Partner.generateInstruction(grid, caver)).equals("D") && counter <= max_number_of_execution) {
+            caver.executeInstruction(instruction);
+            counter++;
+        }
+        if(instruction.equals("D")) {
+            Util.printMessage("Result: Congratulations! The caver found the exit successfully!");
+        } else {
+            Util.printMessage("Result: The caver did not find the exit. Please try again!");
+        }
+
     }
 
 }

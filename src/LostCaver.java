@@ -18,7 +18,8 @@ public class LostCaver {
                             ArrayList<String> instructions = Util.getInstructionsFromUserInput(filename);
                             Util.processInstructionsFromFile(instructions);
                             break;
-                case "-t": break;
+                case "-t":  Util.getUserInputAndProcessInstructions();
+                            break;
                 default:
                     throw new LostCaverException("Warning: Invalid number of arguments. " +
                         "usage: ./test.sh -f [filename] or ./test.sh -t");

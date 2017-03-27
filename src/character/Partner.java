@@ -23,12 +23,75 @@ public class Partner {
 
         if(cPos.getX() == exit.getX() && cPos.getY() == exit.getY()) {
             instruction = "D";
-        else if(cPos.getX() != exit.getX() && cPos.getY() != exit.getY()) {
-            inst = rand.nextInt(3);
-            switch(inst) {
-                case 0: instruction = "L"; break;
-                case 1: instruction = "R"; break;
-                default: instruction = "M"; break;
+        } else if(cPos.getX() < exit.getX() && cPos.getY() < exit.getY()) {
+            switch(cDir) {
+                case E: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "L"; break;
+                            default: instruction = "M"; break;
+                        }
+                        break;
+                case W: instruction = "R"; break;
+                case N: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "R"; break;
+                        }
+                        break;
+                default: instruction = "L"; break;
+
+            }
+        } else if(cPos.getX() < exit.getX() && cPos.getY() > exit.getY()) {
+            switch(cDir) {
+                case E: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "R"; break;
+                        }
+                        break;
+                case W: instruction = "L"; break;
+                case N: instruction = "R"; break;
+                default: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "L"; break;
+                        }
+                        break;
+            }
+        } else if(cPos.getX() > exit.getX() && cPos.getY() > exit.getY()) {
+            switch(cDir) {
+                case E: instruction = "R"; break;
+                case W: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "L"; break;
+                        }
+                        break;
+                case N: instruction = "L"; break;
+                default: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "R"; break;
+                        }
+                        break;
+            }
+        } else if(cPos.getX() > exit.getX() && cPos.getY() < exit.getY()) {
+            switch(cDir) {
+                case E: instruction = "L";
+                        break;
+                case W: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "R"; break;
+                        }
+                        break;
+                case N: inst = rand.nextInt(2) + 1;
+                        switch(inst) {
+                            case 1: instruction = "M"; break;
+                            default: instruction = "L"; break;
+                        }
+                        break;
+                default: instruction = "R"; break;
             }
         } else if(cPos.getX() == exit.getX()) {
             if(cPos.getY() < exit.getY()) {
@@ -37,7 +100,7 @@ public class Partner {
                     case W: instruction = "R"; break;
                     case N: instruction = "M"; break;
                     default:
-                        inst = rand.next(2) + 1;
+                        inst = rand.nextInt(2) + 1;
                         switch(inst) {
                             case 1: instruction = "L"; break;
                             default: instruction = "R"; break;
@@ -49,7 +112,7 @@ public class Partner {
                     case E:  instruction = "R"; break;
                     case W:  instruction = "L"; break;
                     case N:
-                        inst = rand.next(2) + 1;
+                        inst = rand.nextInt(2) + 1;
                         switch(inst) {
                             case 1: instruction = "L"; break;
                             default: instruction = "R"; break;
@@ -64,7 +127,7 @@ public class Partner {
                 switch(cDir) {
                     case E:  instruction = "M"; break;
                     case W:
-                        inst = rand.next(2) + 1;
+                        inst = rand.nextInt(2) + 1;
                         switch(inst) {
                             case 1: instruction = "L"; break;
                             default: instruction = "R"; break;
@@ -76,7 +139,7 @@ public class Partner {
             } else {
                 switch(cDir) {
                     case E:
-                        inst = rand.next(2) + 1;
+                        inst = rand.nextInt(2) + 1;
                         switch(inst) {
                             case 1: instruction = "L"; break;
                             default: instruction = "R"; break;
@@ -87,6 +150,10 @@ public class Partner {
                     default:  instruction = "R"; break;
                 }
             }
+        } else {
+            throw new LostCaverException("Error: Cannot generate instruction for current coordinates [(" +
+                 (int)cPos.getX() + ", " + (int)cPos.getY() + ")] of the Caver and exit [(" +
+                 (int)exit.getX() + ", " + (int)exit.getY() + ")]");
         }
 
         return instruction;

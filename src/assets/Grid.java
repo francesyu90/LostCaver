@@ -21,6 +21,12 @@ public class Grid {
         return this.exit;
     }
 
+    public String toStr() throws LostCaverException {
+        Util.validateCurrentObject(this);
+        String message = "Exit: (" + (int)this.exit.getX() + ", " + (int)this.exit.getY() + ")";
+        return message;
+    }
+
     private static boolean validatePoint(Point point) throws LostCaverException {
         Util.validateCurrentObject(point);
         int x = (int)point.getX();
