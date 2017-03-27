@@ -16,6 +16,14 @@ public class Grid {
         this.exit = new Point(x, y);
     }
 
+    public Grid(Point point) {
+        this.exit = point;
+    }
+
+    public Grid(int x, int y) {
+        this.exit = new Point(x, y);
+    }
+
     public Point getExit() throws LostCaverException {
         Util.validateCurrentObject(this);
         return this.exit;

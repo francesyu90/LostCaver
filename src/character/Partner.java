@@ -155,7 +155,6 @@ public class Partner {
                  (int)cPos.getX() + ", " + (int)cPos.getY() + ")] of the Caver and exit [(" +
                  (int)exit.getX() + ", " + (int)exit.getY() + ")]");
         }
-
         return instruction;
     }
 

@@ -11,7 +11,7 @@ import assets.*;
 
 public class Util {
 
-    private static int max_number_of_execution = 200;
+    private static int MAX_NUM_OF_EXECUTION = 1000;
 
     public static void validateCurrentObject(Object obj) throws LostCaverException {
         if(obj == null) {
@@ -83,7 +83,7 @@ public class Util {
         printMessage(grid.toStr());
         String instruction = null;
         int counter = 0;
-        while(!(instruction = Partner.generateInstruction(grid, caver)).equals("D") && counter <= max_number_of_execution) {
+        while(!(instruction = Partner.generateInstruction(grid, caver)).equals("D") && counter <= MAX_NUM_OF_EXECUTION) {
             caver.executeInstruction(instruction);
             counter++;
         }
