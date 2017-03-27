@@ -96,7 +96,7 @@ public class Caver {
             default:  Util.printMessage("Result: Congratulations! The caver found the exit successfully!");
                       return;
         }
-        Util.printMessage(toStr());
+        // Util.printMessage(toStr());
     }
 
     private void moveForward() throws LostCaverException {

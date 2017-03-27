@@ -7,3 +7,6 @@ To run the program:
 ./main.sh -f [filename]
 or
 ./main.sh -t
+
+
+To run the test: ./test.sh
