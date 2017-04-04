@@ -22,7 +22,7 @@ public class LostCaver {
                             break;
                 default:
                     throw new LostCaverException("Warning: Invalid number of arguments. " +
-                        "usage: ./test.sh -f [filename] or ./test.sh -t");
+                        "usage: ./main.sh -f [filename] or ./main.sh -t");
 
             }
 
